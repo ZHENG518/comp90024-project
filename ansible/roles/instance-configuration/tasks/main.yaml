@@ -1,0 +1,70 @@
+---
+# Configure instances environments
+
+- name: Add proxy settings
+  # activate privilege escalation
+  become: yes
+  blockinfile: 
+    path: /etc/environment
+    block: |
+      HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000/
+      HTTPS_PROXY=http://wwwproxy.unimelb.edu.au:8000/
+      http_proxy=http://wwwproxy.unimelb.edu.au:8000/
+      https_proxy=http://wwwproxy.unimelb.edu.au:8000/
+      no_proxy=localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au
+
+- name: Install dependencies on the instance
+  become: yes
+  apt:
+    name: ['xfsprogs', 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg', 'lsb-release', 'python3-dev', 'python3-pip', 'python3-setuptools']
+    state: latest
+    update_cache: yes
+
+- name: Update pip
+  pip:
+    name: ['pip']
+    state: latest
+# pip install --upgrade pip
+
+- name: Install openstacksdk
+  pip:
+    name: ['openstacksdk==0.52']
+    state: latest
+# pip install openstacksdk
+
+- name: Make file system
+  become: yes
+  filesystem:
+    fstype: xfs
+    dev: "{{ item.device }}"
+  when: item.device is defined
+  with_items:
+    - "{{volumes}}"
+
+- name: Checking folders
+  stat:
+    path: "{{ item.mountpoint }}"
+  register: directory_stats
+  with_items:
+    - "{{ volumes }}"
+
+- name: Create directory
+  become: yes
+  file:
+    path: "{{ item.item.mountpoint }}"
+    recurse: yes
+    state: directory
+  when: item.stat.exists == false
+  with_items:
+    - "{{ directory_stats.results }}"
+
+- name: Mount device
+  become: yes
+  mount:
+    path: "{{ item.mountpoint }}"
+    src: "{{ item.device }}"
+    fstype: xfs
+    state: mounted
+  when: item.device is defined
+  with_items:
+    - "{{ volumes }}"

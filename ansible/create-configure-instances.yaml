@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+    ansible_python_interpreter: /Users/linzheng/opt/anaconda3/python.app/Contents/MacOS/python
+  vars_files:
+    - host_vars/common_vars.yaml
+  gather_facts: true
+
+  roles:
+    - role: volume-creation
+    - role: security-group-creation
+    - role: instance-creation
+
+- hosts: COMP90024
+  vars_files:
+    - host_vars/common_vars.yaml
+  gather_facts: true
+
+  roles:
+    - role: instance-configuration
+    - role: docker-setup
