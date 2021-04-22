@@ -26,12 +26,6 @@
     state: latest
 # pip install --upgrade pip
 
-- name: Install openstacksdk
-  pip:
-    name: ['openstacksdk==0.52']
-    state: latest
-# pip install openstacksdk
-
 - name: Make file system
   become: yes
   filesystem:

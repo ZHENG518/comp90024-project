@@ -1,0 +1,7 @@
+version: '3'
+services: 
+    backend:
+        image: zheng0518/comp90024
+        restart: always
+        ports: 
+            - 80:5000
