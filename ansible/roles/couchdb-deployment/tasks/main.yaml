@@ -1,0 +1,5 @@
+---
+- name: start the counchdb container
+  become:
+    yes
+  shell: docker run -d -p 5984:5984 -p 4369:4369 -p 9100:9100 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password -e COUCHDB_SECRET={{couchdb_cookie}} -e NODENAME={{ansible_host}} ibmcom/couchdb3:latest

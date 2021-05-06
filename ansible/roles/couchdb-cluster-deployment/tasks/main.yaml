@@ -1,0 +1,57 @@
+---
+- name: coudb cluster enable
+  become: yes
+  uri:
+    url: http://admin:password@{{ groups['couchdb-master-instance'][0] }}:5984/_cluster_setup
+    status_code: 201
+    force_basic_auth: yes
+    return_content: yes
+    body_format: json
+    method: POST
+    body: "{\"action\": \"enable_cluster\", \"bind_address\":\"0.0.0.0\",\
+             \"username\": \"admin\", \"password\":\"password\", \"port\": \"5984\",\
+             \"remote_node\": \"{{ item }}\", \"node_count\": \"3\",\
+             \"remote_current_user\":\"admin\", \"remote_current_password\":\"password\"}"
+    headers:
+      Content-Type: "application/json"
+  loop: "{{ groups['couchdb-child-instance'] }}"
+
+
+- name: coudb cluster setup
+  become: yes
+  uri:
+    url: http://admin:password@{{ groups['couchdb-master-instance'][0] }}:5984/_cluster_setup
+    status_code: 201, 409
+    force_basic_auth: yes
+    return_content: yes
+    body_format: json
+    method: POST
+    body: "{\"action\": \"add_node\", \"host\":\"{{ item }}\",\
+             \"port\": \"5984\", \"username\": \"admin\", \"password\":\"password\"}"
+    headers:
+      Content-Type: "application/json"
+  loop: "{{ groups['couchdb-child-instance'] }}"
+
+
+- name: empty request
+  become: yes
+  uri:
+    url: http://admin:password@{{ groups['couchdb-master-instance'][0] }}:5984/
+    status_code: 200,201,409
+    method: GET
+    force_basic_auth: yes
+    return_content: yes
+
+
+- name: finish setup
+  become: yes
+  uri:
+    url: http://admin:password@{{ groups['couchdb-master-instance'][0] }}:5984/_cluster_setup
+    status_code: 201
+    method: POST
+    force_basic_auth: yes
+    return_content: yes
+    body_format: json
+    body: "{\"action\": \"finish_cluster\"}"
+    headers:
+      Content-Type: "application/json"
