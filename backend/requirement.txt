@@ -2,3 +2,4 @@ Flask==1.1.2
 Flask-Cors==3.0.8
 Flask-Environ==0
 requests==2.23.0
+couchdb==1.2

@@ -2,11 +2,23 @@
 availability_zone: melbourne-qh2-uom
 instance_image: f8b79936-6616-4a22-b55d-0d0a1d27bceb
 instance_key_name: zheng
-instance_flavor: uom.mse.2c9g
+couchdb_cookie: 'a192aeb9904e6590849337933b000c99'
 
 # Volume
 volumes:
   - vol_name: backend-volume
+    vol_size: 60
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: frontend-volume
+    vol_size: 60
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: couchdb-volume
+    vol_size: 60
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: harvester-volume
     vol_size: 60
     device: /dev/vdb
     mountpoint: /data
@@ -25,8 +37,36 @@ security_groups:
     port_range_min: 80
     port_range_max: 80
     remote_ip_prefix: 0.0.0.0/0
+  - name: couchdb-sg
+    description: "Security group for couchdb"
+    protocol: tcp
+    port_range_min: 5984
+    port_range_max: 5984
+    remote_ip_prefix: 0.0.0.0/0
+  - name: couchdb-cluster-sg1
+    description: "Security group for couchdb"
+    protocol: tcp
+    port_range_min: 4369
+    port_range_max: 4369
+    remote_ip_prefix: 0.0.0.0/0
+  - name: couchdb-cluster-sg2
+    description: "Security group for couchdb"
+    protocol: tcp
+    port_range_min: 9100
+    port_range_max: 9100
+    remote_ip_prefix: 0.0.0.0/0
 
 # Instance
 instances:
   - name: backend-instance
     volumes: ['backend-volume']
+    flavor: uom.mse.1c4g
+  - name: frontend-instance
+    volumes: ['frontend-volume']
+    flavor: uom.mse.2c9g
+  - name: couchdb-instance
+    volumes: ['couchdb-volume']
+    flavor: uom.mse.2c9g
+  - name: harvester-instance
+    volumes: ['harvester-volume']
+    flavor: uom.mse.2c9g

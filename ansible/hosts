@@ -1,7 +1,27 @@
 [COMP90024]
 
 [backend-instance]
-172.26.132.73
+172.26.129.179
+
+[harvest-instance]
+172.26.133.160
+
+[couchdb-clusters]
+172.26.133.160
+172.26.130.199
+172.26.129.179
+
+[couchdb-master-instance]
+172.26.133.160
+
+[couchdb-child-instance]
+172.26.130.199
+172.26.129.179
+
+
+[frontend-instance]
+172.26.129.177
+
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3

@@ -1,0 +1,13 @@
+- hosts: couchdb-clusters
+  vars_files:
+    - host_vars/common_vars.yaml
+  gather_facts: true
+
+  roles:
+    - role: couchdb-deployment
+
+- hosts: couchdb-master-instance
+  gather_facts: true
+
+  roles:
+    - role: couchdb-cluster-deployment
