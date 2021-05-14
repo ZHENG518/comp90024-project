@@ -1,0 +1,5 @@
+- hosts: frontend-instance
+  gather_facts: true
+
+  roles:
+    - role: frontend-deployment

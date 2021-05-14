@@ -1,0 +1,10 @@
+---
+- name: pull docker image from docker hub
+  become:
+    yes
+  shell: docker pull zheng0518/comp90024-twitter-harvesting
+
+- name: start the container
+  become:
+    yes
+  shell: docker run -d --name='comp90024-twitter-harvesting' -e DATABASE_IP={{ groups['couchdb-master-instance'][0] }} zheng0518/comp90024-twitter-harvesting
