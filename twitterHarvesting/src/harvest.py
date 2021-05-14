@@ -1,11 +1,12 @@
 from tweepy import OAuthHandler, Stream, StreamListener
+import os
 import tweepy
 import json
 import emoji
 import couchdb
 import re
 
-db_ip = 'localhost'
+db_ip = os.environ.get('DATABASE_IP','localhost')
 db_name = 'twitter'
 couchdb_server = couchdb.Server(f'http://admin:password@{db_ip}:5984')
 
@@ -14,11 +15,10 @@ try:
 except:
     db = couchdb_server.create(db_name) # 新建数据库
 
-consumer_key = '2fMtwWMayWv6KGj4S9YP6nP1r'
-consumer_secret = 'JnEuZbKhkmPRkpN2r7QmezKHi1l6cSNQ3GhSXqM6ag0KaH3PQ4'
-access_token = '1384380289187786753-7kFtEmVjCL8tg4Nz4K69kW7mEQwhnL'
-access_token_secret = 'w6KraDeDPV8uG8kh2fwmrWtnDLzO4MYA6o8fr4D1QwNmS'
-melbourne_bouning_box = [144.33363404800002, -38.50298801599996, 145.8784120140001, -37.17509899299995]
+consumer_key = 'NKPCjQct2IhPDAsiYKAsebUMi'
+consumer_secret = 'CEOPKTw8nH3OWnzwsXEy8Y3g2cBHhmV2VxSmMBkeKCFodgTwL0'
+access_token = '1384380289187786753-sEGwL9Z2xf62PYSSmDfbIJAQlrxFfO'
+access_token_secret = 'BteS6uHQH0QuKEvNc3oyScoTHRNcnD8TAqH3tG4W6ndM3'
 Australia_bouning_box = [112.921114, -43.740482, 159.109219, -9.142176]
 mel_place_id = '01864a8a64df9dc4'
 
@@ -56,7 +56,7 @@ def append_attribute(coordinates):
 def loadDictionary():
     slang_wordDict = dict()
     words_All = []
-    with open('../resources/slang.txt','r', encoding='UTF-8') as slang_file:
+    with open('./resources/slang.txt','r', encoding='UTF-8') as slang_file:
         for line in slang_file:
             word=line.split(' ')
             #slang_wordDict.append(word[0].lower())
@@ -109,22 +109,22 @@ if __name__ == '__main__':
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
 
-    # # streaming api
-    # l = StdOutListener()
-    # stream = Stream(auth, l)
-    # stream.filter(locations=Australia_bouning_box)
+    # streaming api
+    l = StdOutListener()
+    stream = Stream(auth, l)
+    stream.filter(locations=Australia_bouning_box)
 
     # search api
-    api = tweepy.API(auth)
-    all_tweets = tweepy.Cursor(api.search,q="place:%s" % mel_place_id,count = 100).pages(100000)
-    for tweet_part in all_tweets:
-        for tweet in tweet_part:
-            tweet_data =tweet._json
-            id_str = tweet_data['id_str']
-            if id_str not in db:
-                document = generate_document(tweet_data)
-                db[id_str] = document
-                print(document)
-            else:
-                print(id_str + ' already in the database')
+    # api = tweepy.API(auth)
+    # all_tweets = tweepy.Cursor(api.search,q="place:%s" % mel_place_id,count = 100).pages(100000)
+    # for tweet_part in all_tweets:
+    #     for tweet in tweet_part:
+    #         tweet_data =tweet._json
+    #         id_str = tweet_data['id_str']
+    #         if id_str not in db:
+    #             document = generate_document(tweet_data)
+    #             db[id_str] = document
+    #             print(document)
+    #         else:
+    #             print(id_str + ' already in the database')
 

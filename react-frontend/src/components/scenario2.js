@@ -3,8 +3,8 @@ import { Card, Row, Col } from "antd";
 import ReactMapGL, { Source, Layer } from "react-map-gl";
 // import * as geojson from './SA3-language.json'
 import "./style.less";
-import { base_ip } from "../api";
 
+const backend_ip = process.env.BACKEND_IP || 'http://localhost';
 
 function Map(pro) {
 
@@ -12,7 +12,7 @@ function Map(pro) {
   useEffect(() => {
     /* global fetch */
     fetch(
-      'http://localhost:5000/language_data'
+      backend_ip+':5000/language_data'
     )
       .then(resp => resp.json())
       .then(json => setAllData(json.data));

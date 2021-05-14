@@ -1,9 +1,10 @@
+import os
 from flask import Flask, jsonify, request, g
 from flask_cors import CORS
-from backend.resources import lag_code_map
+from resources import lag_code_map
 import couchdb
 
-db_ip = 'localhost'
+db_ip = os.environ.get('DATABASE_IP','localhost')
 db_name = 'twitter'
 db_server = couchdb.Server(f'http://admin:password@{db_ip}:5984')
 
@@ -98,10 +99,10 @@ def test():
         name = request.args.get("name")
         return jsonify({
             'code': 1000,
-            'data': f'Hello,{name}!'
+            'data': f'Backend deploy successfully! Database IP: {db_ip}'
         })
     except Exception as e:
         return jsonify({'code': 2000, 'message': e})
 
 if __name__ == '__main__':
-    app.run(host="localhost")
+    app.run(host="0.0.0.0")

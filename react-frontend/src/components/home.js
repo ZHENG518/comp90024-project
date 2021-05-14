@@ -15,13 +15,6 @@ const style = {
 }
 
 export default class Home extends Component{
-    // get_sum = () => {
-    //     basic_states().then(response => {
-    //         console.log('成功了', response.data.total_counts)
-    //     }).catch(error => {
-    //         console.log('失败了', error)
-    //     })
-    // }
     constructor(props) {
         super(props);
         this.state = {
@@ -41,8 +34,10 @@ export default class Home extends Component{
 
     render() {
         return (
-            <div className="home" style={style.bgd}>
-                <h2>Now we have {this.state.num} tweets.</h2>
+            <div style={style.bgd}>
+                <div className="title">
+                    <h2>Now we have {this.state.num} tweets.</h2>
+                </div>
             </div>
         )
     }

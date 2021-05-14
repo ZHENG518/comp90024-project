@@ -6,6 +6,9 @@
 [harvest-instance]
 172.26.133.160
 
+[frontend-instance]
+172.26.129.177
+
 [couchdb-clusters]
 172.26.133.160
 172.26.130.199
@@ -18,9 +21,6 @@
 172.26.130.199
 172.26.129.179
 
-
-[frontend-instance]
-172.26.129.177
 
 
 [all:vars]

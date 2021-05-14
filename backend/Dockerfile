@@ -8,4 +8,6 @@ WORKDIR /root/backend
 COPY . /root/backend/
 RUN pip install -r /root/backend/requirement.txt
 
+ENV DATABASE_IP localhost
+
 ENTRYPOINT ["python", "/root/backend/app.py"]

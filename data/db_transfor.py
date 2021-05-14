@@ -1,7 +1,7 @@
 import json
 import couchdb
 
-db_ip = 'localhost'
+db_ip = '172.26.133.160'
 db_name = 'aurin_language_data'
 couchdb_server = couchdb.Server(f'http://admin:password@{db_ip}:5984')
 with open('./language_data.json', 'r') as f:

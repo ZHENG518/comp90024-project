@@ -7,4 +7,4 @@
 - name: start the container
   become:
     yes
-  shell: docker run -d -p 80:5000 --name='comp90024-backend' zheng0518/comp90024-backend
+  shell: docker run -d -p 80:5000 --name='comp90024-backend' -e DATABASE_IP={{ groups['couchdb-master-instance'][0] }} zheng0518/comp90024-backend
