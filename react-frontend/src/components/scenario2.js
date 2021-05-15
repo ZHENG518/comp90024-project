@@ -4,7 +4,7 @@ import ReactMapGL, { Source, Layer } from "react-map-gl";
 // import * as geojson from './SA3-language.json'
 import "./style.less";
 
-const backend_ip = process.env.BACKEND_IP || 'http://localhost';
+const backend_ip = process.env.BACKEND_IP || 'http://localhost:5000';
 
 function Map(pro) {
 
@@ -12,7 +12,7 @@ function Map(pro) {
   useEffect(() => {
     /* global fetch */
     fetch(
-      backend_ip+':5000/language_data'
+      backend_ip+'/language_data'
     )
       .then(resp => resp.json())
       .then(json => setAllData(json.data));
@@ -109,6 +109,7 @@ export default class Scenario2 extends Component {
   render() {
     return (
       <div>
+        <h1 style={{fontSize:'30px'} }>Language Usage in Melbourne Regions</h1>
         <Row gutter={[8, 8]}>
           <Col span={12}>
           <Card title="Speeking English Only">

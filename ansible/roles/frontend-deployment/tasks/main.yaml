@@ -7,4 +7,4 @@
 - name: start the container
   become:
     yes
-  shell: docker run -d -p 80:3000 --name='comp90024-frontend' -e BACKEND_IP=http://{{ groups['backend-instance'][0] }} zheng0518/comp90024-frontend
+  shell: docker run -d -p 80:3000 --name='comp90024-frontend' -e BACKEND_IP=http://{{ groups['backend-instance'][0] }}:5000 zheng0518/comp90024-frontend

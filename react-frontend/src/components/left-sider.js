@@ -30,7 +30,7 @@ class LeftSider extends Component{
           </Menu.Item>
           <Menu.Item key="/scenario1" icon={<PieChartOutlined />}>
             <Link to='/scenario1'>
-                <span>Scenario 1</span>
+                            <span>Scenario 1</span>
             </Link>
           </Menu.Item>
           <Menu.Item key="/scenario2" icon={<CommentOutlined />}>
