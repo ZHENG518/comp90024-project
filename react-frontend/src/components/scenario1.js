@@ -34,10 +34,12 @@ export default class Scenario1 extends Component {
         formatter: "{a} <br/>{b} : {c} ({d}%)",
       },
       legend: {
+        type:'scroll',
         orient: "vertical",
-        left: "left",
+        left: 0,
         data: this.state.langugae_data.map(x => x.name),
       },
+
       series: [
         {
           name: "Language Count",
@@ -113,6 +115,7 @@ export default class Scenario1 extends Component {
       console.log(this.state.slang_data)
     return (
       <div>
+        <h1 style={{fontSize:'30px'} }>Australian Tweet Content Statistics</h1>
         <Row gutter={[8, 8]}>
           <Col span={12}>
             <Card title="Language">
@@ -127,12 +130,12 @@ export default class Scenario1 extends Component {
         </Row>
         <Row gutter={[8, 8]}>
           <Col span={12}>
-            <Card title="Internet Slang Top 50">
+            <Card title="Internet Slang">
               <ReactEcharts option={this.wordOption(this.state.slang_data)} />
             </Card>
           </Col>
           <Col span={12}>
-            <Card title="Emoji Top 50">
+            <Card title="Emoji">
               <ReactEcharts option={this.wordOption(this.state.emoji_data)} />
             </Card>
           </Col>
