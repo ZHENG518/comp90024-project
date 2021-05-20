@@ -130,12 +130,12 @@ export default class Scenario1 extends Component {
         </Row>
         <Row gutter={[8, 8]}>
           <Col span={12}>
-            <Card title="Internet Slang">
+            <Card title="Internet Slang Top 100">
               <ReactEcharts option={this.wordOption(this.state.slang_data)} />
             </Card>
           </Col>
           <Col span={12}>
-            <Card title="Emoji">
+            <Card title="Emoji Top 100">
               <ReactEcharts option={this.wordOption(this.state.emoji_data)} />
             </Card>
           </Col>

@@ -21,9 +21,13 @@ def basic_stats():
     try:
         language_count_view = twitter_db.view('basic_stats/language_count', reduce='true', group_level='1')
         language_count = []
+        others_count = 0
         for row in language_count_view.rows:
             if row.key[0] in lag_code_map:
-                language_count.append({'name':lag_code_map.get(row.key[0]),'value':row.value})
+                language_count.append({'name': lag_code_map.get(row.key[0]), 'value': row.value})
+            else:
+                others_count += row.value
+        language_count.append({'name':'others','value':others_count})
 
         hashtag_count_view = twitter_db.view('basic_stats/hashtag_count', reduce='true', group_level='1')
         hashtag_count = []
@@ -64,13 +68,12 @@ def language_data():
     language_count_view = twitter_db.view('basic_stats/suburb_language', reduce='true', group_level='1')
     language_count = {}
     for row in language_count_view.rows:
-        if row.key[0] in lag_code_map:
-            language_count[lag_code_map[row.key[0]]] = row.value
+        language_count[lag_code_map.get(row.key[0],'others')] = row.value
 
     suburb_language_view = twitter_db.view('basic_stats/suburb_language', reduce='true', group_level='2')
     suburb_language = {}
     for row in suburb_language_view.rows:
-        language = lag_code_map[row.key[0]]
+        language = lag_code_map.get(row.key[0],'others')
         suburb = row.key[1]
         suburb_dict = suburb_language.get(suburb, dict())
         suburb_dict[language + '_tweets'] = row.value

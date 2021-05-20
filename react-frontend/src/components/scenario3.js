@@ -3,8 +3,7 @@ import { Card, Row, Col } from "antd";
 import ReactMapGL, { Source, Layer } from "react-map-gl";
 import ReactEcharts from "echarts-for-react";
 import { covid_cases } from "../api";
-const backend_ip = process.env.BACKEND_IP || "http://localhost:5000";
-
+const backend_ip = process.env.BACKEND_IP || 'http://172.26.134.60:80';
 function Map(pro) {
   const [allData, setAllData] = useState(null);
   useEffect(() => {
