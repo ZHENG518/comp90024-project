@@ -1,12 +1,16 @@
 import couchdb
 
-db_ip = 'localhost'
-couch = couchdb.Server(f'http://admin:password@{db_ip}:5984')
+db_ip = '172.26.132.26'
+couchdb_server = couchdb.Server(f'http://admin:password@{db_ip}:5984')
 
 # couchdb views for scenario1，2
 db_name = 'twitter'
 design_doc_name = 'basic_stats'
-db = couch[db_name]
+
+try:
+    db = couchdb_server[db_name] # 使用已经存在的数据库
+except:
+    db = couchdb_server.create(db_name) # 新建数据库
 
 basic_stats_views = {
     "language_count":{
@@ -54,7 +58,11 @@ basic_stats_views = {
 db[f'_design/{design_doc_name}'] = dict(language='javascript', views=basic_stats_views)
 
 # couchdb views for scenario 3
-db = couch['twitter_covid']
+db_name = 'twitter_covid'
+try:
+    db = couchdb_server[db_name] # 使用已经存在的数据库
+except:
+    db = couchdb_server.create(db_name) # 新建数据库
 
 views = {
     "emotion_count": {

@@ -14,7 +14,7 @@ C|N>K — a Unix -ism meaning "coffee through nose into keyboard"
 cya — "see you", used as a goodbye.
 CU — "see you", used as a goodbye.
 CYS — "Check your settings". A phrase often said by technical support staff of a certain Australian ISP.
-FAQ — "Frequently Asked Question"
+FAQ — "Frequently Asked Question"f
 FFS — "for fuck's sake!"
 FOAF — "friend of a friend", i.e. the dubious attribution given to urban legends
 FYI — "for your information"
@@ -40,7 +40,6 @@ IYDMMA — "if you don't mind me asking", for ex., "IYDMMA, are you a virgin?"
 JJ or JK (j/k) — "just joking", "just kidding"
 Joo — synonym of you. Also spelled j00 with a lower case j and two zeroes rather than two O's.
 JOOC — "just out of curiosity"
-k — short for "OK"
 l8 — a shorthand spelling of "late".
 l8r — a shorthand spelling of "later", meaning "see you later" (see leet )
 LIEK — synonym of like, as in "I like that website".
@@ -52,7 +51,6 @@ NOYB — "none of your business"
 NP — "No Problem"
 NSFW — "Not safe for work." Material (pictures, webpages) not suitable for the office, but for the home instead. Used by Fark . See SFW.
 NT — "No Text", used on Internet forums or Usenet to indicate that a post has no content
-O — "oh"
 OIC — "oh, I see"
 OMG — Exclamation, "Oh my God!!"
 OMFG — Exclamation, "Oh my fucking God!!"
@@ -86,7 +84,6 @@ thx — shorthand spelling of "thanks" - this can be combined into "kthx" (OK, t
 TTFN — Ta Ta For Now
 TIA — "thanks in advance"
 TTYL — "talk to you later"
-U — a shorthand spelling of "you"
 ur — a shorthand spelling of "you're"
 w/e — slang/abbreviation for whatever
 w/o — without

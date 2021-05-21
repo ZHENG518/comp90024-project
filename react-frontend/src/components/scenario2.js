@@ -4,7 +4,8 @@ import ReactMapGL, { Source, Layer } from "react-map-gl";
 // import * as geojson from './SA3-language.json'
 import "./style.less";
 
-const backend_ip = process.env.BACKEND_IP || 'http://localhost:5000';
+const backend_ip = process.env.BACKEND_IP || 'http://172.26.134.60:80';
+
 
 function Map(pro) {
 
@@ -117,8 +118,8 @@ export default class Scenario2 extends Component {
             </Card>
           </Col>
           <Col span={12}>
-          <Card title="Arabic">
-            <MapHook language="Arabic" />
+          <Card title="Korean">
+            <MapHook language="Korean" />
             </Card>
             </Col>
         </Row>
@@ -129,8 +130,8 @@ export default class Scenario2 extends Component {
             </Card>
           </Col>
           <Col span={12}>
-          <Card title="Greek">
-            <MapHook language="Greek" />
+          <Card title="Japanese">
+            <MapHook language="Japanese" />
             </Card>
             </Col>
         </Row>

@@ -35,4 +35,13 @@ lag_code_map = {
     'zh':'Chinese',
     'et': 'Estonian',
     'in': 'Hindi',
+    'tl':'Tagalog',
+    'pt': 'Portuguese',
+    'ht':'Haitian Creole',
+    'iw':'Hebrew',
+    'eu':'Basque',
+    'cy':'Welsh',
+    'lv':'Latvian',
+    'lt':'Lithuanian',
+    'sl':'Slovenian'
 }
