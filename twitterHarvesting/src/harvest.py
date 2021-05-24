@@ -6,8 +6,8 @@ import emoji
 import couchdb
 import re
 
-# db_ip = os.environ.get('DATABASE_IP','localhost')
-db_ip = '172.26.132.26'
+db_ip = os.environ.get('DATABASE_IP','localhost')
+# db_ip = '172.26.132.26'
 db_name = 'twitter'
 couchdb_server = couchdb.Server(f'http://admin:password@{db_ip}:5984')
 
@@ -16,15 +16,15 @@ try:
 except:
     db = couchdb_server.create(db_name) # 新建数据库
 
-consumer_key = 'Xm8NLd2HVSpcwZh94FRMhp8zK'
-consumer_secret = 'tokpqJFu9wa54soHkYvq2QSWGEDLNzmREaGS1InkfgwuCE9xdZ'
-access_token = '1384380289187786753-aEOI10FGgKGlejbL3hObtvLHU9pgQ9'
-access_token_secret = 'jfRPnUHDfUKVDmcOuJKKLwyn9semcZRb06oWeXDKV318g'
+consumer_key = 'T1R0XcIMYMSLIsz0li5D0Unpk'
+consumer_secret = 'rVEmEbwTMXVqr4QCy6AFlkFguXC5McXbjmqeUKSEUwfLXjQZHi'
+access_token = '1384380289187786753-pVfah4p4hWFf35GDQv8hQaG1h7sYCo'
+access_token_secret = 'eCkkgnCZsRcXdKyCuLjr1ZPYcZNAo4sPULoPBXzTJdB49'
 Australia_bouning_box = [112.921114, -43.740482, 159.109219, -9.142176]
 mel_place_id = '01864a8a64df9dc4'
 
-# aurin_db = couchdb_server['aurin_data']
-aurin_db = couchdb.Server(f'http://admin:password@localhost:5984')['aurin_data']
+aurin_db = couchdb_server['aurin_data']
+# aurin_db = couchdb.Server(f'http://admin:password@localhost:5984')['aurin_data']
 region_data = dict(aurin_db['language_data'])
 
 def point_check_inside(lng, lat, polygon):
@@ -56,7 +56,7 @@ def append_attribute(coordinates):
 
 def loadDictionary():
     words_All = []
-    with open('../resources/internet_slangs.txt','r', encoding='UTF-8') as slang_file:
+    with open('./resources/internet_slangs.txt','r', encoding='UTF-8') as slang_file:
         for line in slang_file.readlines():
             word=line.strip('\n')
             words_All.append(word.lower())
@@ -108,21 +108,21 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
 
     # streaming api
-    # l = StdOutListener()
-    # stream = Stream(auth, l)
-    # stream.filter(locations=Australia_bouning_box)
+    l = StdOutListener()
+    stream = Stream(auth, l)
+    stream.filter(locations=Australia_bouning_box)
 
     # search api
-    api = tweepy.API(auth)
-    all_tweets = tweepy.Cursor(api.search,q="place:%s" % mel_place_id,count = 100).pages(100000)
-    for tweet_part in all_tweets:
-        for tweet in tweet_part:
-            tweet_data =tweet._json
-            id_str = tweet_data['id_str']
-            if id_str not in db:
-                document = generate_document(tweet_data)
-                db[id_str] = document
-                print(document)
-            else:
-                print(id_str + ' already in the database')
+    # api = tweepy.API(auth)
+    # all_tweets = tweepy.Cursor(api.search,q="place:%s" % mel_place_id,count = 100).pages(100000)
+    # for tweet_part in all_tweets:
+    #     for tweet in tweet_part:
+    #         tweet_data =tweet._json
+    #         id_str = tweet_data['id_str']
+    #         if id_str not in db:
+    #             document = generate_document(tweet_data)
+    #             db[id_str] = document
+    #             print(document)
+    #         else:
+    #             print(id_str + ' already in the database')
 

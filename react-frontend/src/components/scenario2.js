@@ -113,7 +113,7 @@ export default class Scenario2 extends Component {
         <h1 style={{fontSize:'30px'} }>Language Usage in Melbourne Regions</h1>
         <Row gutter={[8, 8]}>
           <Col span={12}>
-          <Card title="Speeking English Only">
+          <Card title="Speaking English Only">
             <MapHook language="English" />
             </Card>
           </Col>
