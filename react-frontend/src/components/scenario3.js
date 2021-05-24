@@ -151,7 +151,7 @@ export default class Scenario3 extends Component {
       <div>
         <Row gutter={[8, 8]}>
           <Col span={12}>
-            <Card title="COVID-19 Tweets Snetiment Analysis">
+            <Card title="COVID-19 Tweets Sentiment Analysis">
               <MapHook />
             </Card>
           </Col>
